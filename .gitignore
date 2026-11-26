@@ -1,0 +1,53 @@
+# Local toolchains and build output
+.tools/
+.tmp/
+debug.log
+**/bin/
+**/obj/
+
+# Probe logs
+artifacts/
+*.jsonl
+
+# Prototype dependencies and generated output
+prototype/node_modules/
+prototype/dist/
+prototype/dev.log
+prototype/dev.err.log
+
+# IDE and OS files
+.vs/
+.idea/
+*.user
+*.suo
+.DS_Store
+Thumbs.db
+
+# Local credentials and machine-specific configuration
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pfx
+*.p12
+*.key
+*.pem
+.codex/
+.agents/
+.aws/
+
+# Local diagnostics, screenshots and private development material
+/audit/
+/design-audit/
+/design-qa.md
+/prototype/
+/docs/mockups/
+*.log
+*.dmp
+*.etl
+*.pdb
+*.lrc
+*.lrcx
+*.db
+*.sqlite*
+settings.json

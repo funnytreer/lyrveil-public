@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\LyricsXQuiet.Core\LyricsXQuiet.Core.csproj" />
+    <ProjectReference Include="..\LyricsXQuiet.Platform.Windows\LyricsXQuiet.Platform.Windows.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>LyricsXQuiet.App</RootNamespace>
+    <StartupObject>LyricsXQuiet.App.Program</StartupObject>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationIcon>Assets\lyrveil-app.ico</ApplicationIcon>
+    <Version>0.2.0</Version>
+    <FileVersion>0.2.0.0</FileVersion>
+    <AssemblyVersion>0.2.0.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="OverlayPositionSmokeTests" />
+    <Resource Include="Assets\lyrveil-app.ico" />
+    <Resource Include="Assets\tray-*-ink.ico" />
+    <Resource Include="Assets\lyrveil-icon-64.png" />
+    <Resource Include="Assets\Fonts\NotoSansCJKsc-Regular.otf" />
+    <Content Include="Assets\Fonts\Noto-CJK-OFL.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

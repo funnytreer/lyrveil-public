@@ -1,0 +1,18 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+    <SolidColorBrush x:Key="Surface.Canvas" Color="#14171A" options:Freeze="True" />
+    <SolidColorBrush x:Key="Surface.Sidebar" Color="#101316" options:Freeze="True" />
+    <SolidColorBrush x:Key="Surface.Card" Color="#1B2024" options:Freeze="True" />
+    <SolidColorBrush x:Key="Surface.Subtle" Color="#232A2F" options:Freeze="True" />
+    <SolidColorBrush x:Key="Surface.Tray" Color="#0F1215" options:Freeze="True" />
+    <SolidColorBrush x:Key="Border.Hairline" Color="#2A3137" options:Freeze="True" />
+    <SolidColorBrush x:Key="Text.Primary" Color="#EBF0EE" options:Freeze="True" />
+    <SolidColorBrush x:Key="Text.Secondary" Color="#94A09C" options:Freeze="True" />
+    <SolidColorBrush x:Key="Text.Muted" Color="#697470" options:Freeze="True" />
+    <SolidColorBrush x:Key="Accent.Primary" Color="#5EEAD4" options:Freeze="True" />
+    <SolidColorBrush x:Key="Accent.Soft" Color="#163330" options:Freeze="True" />
+    <SolidColorBrush x:Key="Accent.Border" Color="#2B5E57" options:Freeze="True" />
+    <SolidColorBrush x:Key="Danger.Text" Color="#FB7185" options:Freeze="True" />
+    <SolidColorBrush x:Key="Danger.Soft" Color="#3B1E24" options:Freeze="True" />
+</ResourceDictionary>

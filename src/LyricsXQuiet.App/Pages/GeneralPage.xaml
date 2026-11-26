@@ -1,0 +1,142 @@
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:state="clr-namespace:LyricsXQuiet.App.State"
+    xmlns:pages="clr-namespace:LyricsXQuiet.App.Pages" xmlns:windows="clr-namespace:LyricsXQuiet.App.Windows"
+    xmlns:playback="clr-namespace:LyricsXQuiet.Core.Playback;assembly=LyricsXQuiet.Core"
+    x:Class="LyricsXQuiet.App.Pages.GeneralPage">
+    <ScrollViewer Style="{StaticResource SettingsScroller}">
+        <StackPanel Style="{StaticResource SettingsPage}">
+            <TextBlock Style="{StaticResource SettingsSectionTitle}" Text="常规" />
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <CheckBox Style="{StaticResource SettingsCheckBox}" Content="显示桌面歌词"
+                        IsChecked="{Binding Settings.ShowLyrics}" />
+                    <CheckBox Style="{StaticResource SettingsCheckBox}" Content="播放暂停时隐藏"
+                        IsChecked="{Binding Settings.HideWhenPaused}" />
+                    <CheckBox Style="{StaticResource SettingsCheckBox}" Margin="0" Content="始终置于其他窗口上方"
+                        IsChecked="{Binding Settings.Topmost}" />
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Margin="0,0,0,12" FontWeight="Normal" FontSize="15"
+                        Foreground="{DynamicResource Text.Primary}" Text="跟随播放器启动" />
+                    <TextBlock Margin="0,-6,0,12" FontSize="11.5" Foreground="{DynamicResource Text.Secondary}"
+                        TextWrapping="Wrap" Text="两种方式可以同时启用：任务栏或原入口由监听器跟随，组合快捷方式仍可直接同时启动。" />
+                    <Border Padding="4" Background="{DynamicResource Surface.Subtle}"
+                        BorderBrush="{DynamicResource Border.Hairline}" BorderThickness="1" CornerRadius="10">
+                        <StackPanel>
+                            <Border x:Name="MonitorModeOptionBorder" Style="{StaticResource FollowModeOptionRow}"
+                                Tag="{Binding IsChecked, ElementName=MonitorModeCheckBox}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="22" />
+                                        <ColumnDefinition Width="12" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="16" />
+                                        <ColumnDefinition Width="132" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="34" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <CheckBox x:Name="MonitorModeCheckBox" Grid.Row="0" Grid.Column="0" Width="22"
+                                        Margin="0" HorizontalAlignment="Center"
+                                        Style="{StaticResource SettingsCheckBox}"
+                                        FocusVisualStyle="{StaticResource SettingsCenteredCheckBoxFocusVisual}"
+                                        AutomationProperties.Name="启用后台播放器监听"
+                                        AutomationProperties.HelpText="从任务栏、开始菜单或播放器原入口启动时，自动启动词间。" />
+                                    <WrapPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Center">
+                                        <TextBlock VerticalAlignment="Center" FontWeight="Normal" Text="跟随音乐软件自动启动" />
+                                        <Border Margin="6,0,0,0" Padding="7,2" CornerRadius="6" Background="{DynamicResource Accent.Soft}">
+                                            <TextBlock x:Name="MonitorStatus" FontSize="11.5" Foreground="{DynamicResource Accent.Primary}" />
+                                        </Border>
+                                    </WrapPanel>
+                                    <Button x:Name="ManageMonitoredPlayersButton" Grid.Row="0" Grid.RowSpan="2"
+                                        Grid.Column="4" Width="132" VerticalAlignment="Center"
+                                        AutomationProperties.Name="配置后台监听的播放器"
+                                        AutomationProperties.HelpText="选择监听器需要跟随的播放器。">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                                <Setter Property="Content" Value="选择播放器…" />
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,2,0,2" FontSize="11.5"
+                                        Foreground="{DynamicResource Text.Secondary}" TextWrapping="Wrap"
+                                        Text="低占用后台等待；从任务栏、开始菜单或播放器原入口启动时自动启动词间。" />
+                                </Grid>
+                            </Border>
+                            <Border Height="1" Margin="10,0" Background="{DynamicResource Border.Hairline}" />
+                            <Border x:Name="ShortcutModeOptionBorder" Style="{StaticResource FollowModeOptionRow}"
+                                Tag="{Binding IsChecked, ElementName=ShortcutModeCheckBox}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="22" />
+                                        <ColumnDefinition Width="12" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="16" />
+                                        <ColumnDefinition Width="132" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="34" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <CheckBox x:Name="ShortcutModeCheckBox" Grid.Row="0" Grid.Column="0" Width="22"
+                                        Margin="0" HorizontalAlignment="Center"
+                                        Style="{StaticResource SettingsCheckBox}"
+                                        FocusVisualStyle="{StaticResource SettingsCenteredCheckBoxFocusVisual}"
+                                        AutomationProperties.Name="启用组合快捷方式"
+                                        AutomationProperties.HelpText="保留播放器名称和图标，并从快捷方式同时启动播放器与词间。" />
+                                    <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" FontSize="13"
+                                        FontWeight="Normal" Foreground="{DynamicResource Text.Primary}"
+                                        Text="使用组合快捷方式" />
+                                    <Button x:Name="CreateCompanionShortcutsButton" Grid.Row="0" Grid.RowSpan="2"
+                                        Grid.Column="4" Width="132" VerticalAlignment="Center"
+                                        AutomationProperties.Name="配置播放器组合快捷方式"
+                                        AutomationProperties.HelpText="为选中的播放器创建组合快捷方式。">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                                <Setter Property="Content" Value="创建快捷方式…" />
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,2,0,2" FontSize="11.5"
+                                        Foreground="{DynamicResource Text.Secondary}" TextWrapping="Wrap"
+                                        Text="保留播放器名称和图标；从该快捷方式同时启动播放器与词间。" />
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                    <Border Margin="0,14,0,0" Padding="0,14,0,0" BorderBrush="{DynamicResource Border.Hairline}"
+                        BorderThickness="0,1,0,0">
+                        <StackPanel>
+                            <CheckBox Margin="0" Style="{StaticResource SettingsCheckBox}" Content="支持的播放器全部退出时关闭词间"
+                                IsChecked="{Binding Settings.ExitWhenPlayersClose}" />
+                            <TextBlock Margin="32,8,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Secondary}"
+                                TextWrapping="Wrap"
+                                Text="设置窗或快速面板打开时暂缓退出。手动打开词间后，先检测到播放器运行，再在所有播放器退出后关闭。" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,20,0">
+                        <TextBlock FontSize="15" FontWeight="Normal" Foreground="{DynamicResource Text.Primary}"
+                            Text="当前状态" />
+                        <TextBlock Margin="0,8,0,0" FontSize="13" FontWeight="SemiBold"
+                            Foreground="{DynamicResource Text.Primary}" Text="{Binding State.TrackDisplay}" />
+                        <TextBlock Margin="0,4,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Secondary}"
+                            TextWrapping="Wrap" Text="{Binding State.LyricsStatus}" />
+                    </StackPanel>
+                    <Button x:Name="CheckPlayerCompatibilityButton" Grid.Column="1" Width="140"
+                        VerticalAlignment="Center" Content="检查播放器兼容性…" />
+                </Grid>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

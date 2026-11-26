@@ -1,0 +1,51 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:LyricsXQuiet.App.Windows"
+    x:Class="LyricsXQuiet.App.Windows.OverlayWindow" WindowStyle="None" AllowsTransparency="True"
+    Background="Transparent" ShowInTaskbar="False" ShowActivated="False" ResizeMode="NoResize" Title="词间桌面歌词"
+    AutomationProperties.Name="词间桌面歌词" SizeToContent="WidthAndHeight" Topmost="True" MaxWidth="1280"
+    SnapsToDevicePixels="True">
+    <StackPanel>
+        <Border x:Name="EditingTools" Visibility="Collapsed" HorizontalAlignment="Center" CornerRadius="14"
+            Background="#ED141C24" BorderBrush="#785EEAD4" BorderThickness="1" Margin="0,0,0,5" Padding="4,2">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="水平居中" Padding="8,3" Click="OnCenterClick" Style="{StaticResource SettingsButton}"
+                    MinHeight="24" FontSize="12.5" />
+                <Button Content="贴靠任务栏" Padding="8,3" Click="OnDockClick" Style="{StaticResource SettingsButton}"
+                    MinHeight="24" FontSize="12.5" />
+                <Button Content="完成并锁定" Padding="8,3" Click="OnLockClick" Style="{StaticResource SettingsButton}"
+                    MinHeight="24" FontSize="12.5" />
+            </StackPanel>
+        </Border>
+        <Grid>
+            <Border x:Name="PanelBorder" CornerRadius="12" Padding="24,8"
+                MouseLeftButtonDown="OnMouseLeftButtonDown">
+                <StackPanel x:Name="LyricStack">
+                    <StackPanel.RenderTransform>
+                        <TranslateTransform x:Name="LineTranslation" />
+                    </StackPanel.RenderTransform>
+                    <Grid x:Name="CurrentLineGrid" HorizontalAlignment="Center">
+                        <local:OutlinedLyricText x:Name="CurrentBaseTextOutline">
+                            <TextBlock x:Name="CurrentBaseText" Foreground="White" FontSize="24"
+                                TextAlignment="Center" TextWrapping="NoWrap" />
+                        </local:OutlinedLyricText>
+                        <Border x:Name="CurrentProgressClip" HorizontalAlignment="Left" ClipToBounds="True">
+                            <Border.Clip>
+                                <RectangleGeometry x:Name="ProgressGeometry" />
+                            </Border.Clip>
+                            <TextBlock x:Name="CurrentProgressText" Foreground="#33FFDD" FontSize="24"
+                                TextAlignment="Center" TextWrapping="NoWrap" />
+                        </Border>
+                    </Grid>
+                    <local:OutlinedLyricText x:Name="SecondaryTextOutline">
+                        <TextBlock x:Name="SecondaryText" Foreground="White" FontSize="24" TextAlignment="Center"
+                            TextWrapping="NoWrap" />
+                    </local:OutlinedLyricText>
+                </StackPanel>
+            </Border>
+            <Rectangle x:Name="EditingOutline" RadiusX="12" RadiusY="12" Stroke="#995EEAD4" StrokeDashArray="4 3"
+                Visibility="Collapsed" IsHitTestVisible="False" />
+            <Rectangle x:Name="CenterGuide" Width="1" Fill="#995EEAD4" HorizontalAlignment="Center"
+                Visibility="Collapsed" IsHitTestVisible="False" />
+        </Grid>
+    </StackPanel>
+</Window>

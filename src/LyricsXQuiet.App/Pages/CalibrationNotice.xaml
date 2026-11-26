@@ -1,0 +1,23 @@
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="LyricsXQuiet.App.Pages.CalibrationNotice">
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Setter Property="Visibility" Value="Visible" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CalibrationPrompt}" Value="">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
+    <Border CornerRadius="8" Background="{DynamicResource Accent.Soft}" Padding="8" Margin="0,4">
+        <StackPanel>
+            <TextBlock Text="{Binding CalibrationPrompt}" Foreground="{DynamicResource Text.Primary}"
+                TextWrapping="Wrap" />
+            <WrapPanel>
+                <Button Content="保留原校准" Style="{StaticResource SettingsButton}" Click="Keep" />
+                <Button Content="清零" Style="{StaticResource SettingsButton}" Margin="5,0,0,0" Click="Clear" />
+            </WrapPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">词间 · Lyrveil 应用图标</title>
+  <desc id="desc">深青黑圆角底板上的词字，左侧薄荷青覆盖表示歌词同步进度。</desc>
+  <defs>
+    <clipPath id="lyric-progress">
+      <rect x="0" y="0" width="62" height="128" />
+    </clipPath>
+  </defs>
+  <rect width="128" height="128" rx="27" fill="#142E2C" />
+  <text x="64" y="92"
+        text-anchor="middle"
+        font-family="Microsoft YaHei UI, PingFang SC, Noto Sans CJK SC, sans-serif"
+        font-size="73"
+        font-weight="700"
+        fill="#F4F7F6">词</text>
+  <text x="64" y="92"
+        text-anchor="middle"
+        font-family="Microsoft YaHei UI, PingFang SC, Noto Sans CJK SC, sans-serif"
+        font-size="73"
+        font-weight="700"
+        fill="#33FFDD"
+        clip-path="url(#lyric-progress)">词</text>
+</svg>

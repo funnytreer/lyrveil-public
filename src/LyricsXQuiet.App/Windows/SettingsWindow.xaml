@@ -1,0 +1,81 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:state="clr-namespace:LyricsXQuiet.App.State"
+    xmlns:pages="clr-namespace:LyricsXQuiet.App.Pages" xmlns:windows="clr-namespace:LyricsXQuiet.App.Windows"
+    xmlns:playback="clr-namespace:LyricsXQuiet.Core.Playback;assembly=LyricsXQuiet.Core"
+    x:Class="LyricsXQuiet.App.Windows.SettingsWindow" Title="词间 · Lyrveil 设置" Width="960" Height="650"
+    MinWidth="760" MinHeight="540" FontSize="13" Background="{DynamicResource Surface.Canvas}"
+    Foreground="{DynamicResource Text.Primary}" Icon="/Assets/lyrveil-app.ico" WindowStartupLocation="CenterScreen">
+    <TabControl x:Name="Navigation" Style="{StaticResource SettingsTabControl}"
+        TabStripPlacement="Left" SelectedIndex="0">
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="14" Width="18"
+                        TextAlignment="Center" VerticalAlignment="Center" Text="" />
+                    <TextBlock Margin="9,0,0,0" Text="常规" />
+                </StackPanel>
+            </TabItem.Header>
+            <pages:GeneralPage x:Name="GeneralPanel" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="14" Width="18"
+                        TextAlignment="Center" VerticalAlignment="Center" Text="" />
+                    <TextBlock Margin="9,0,0,0" Text="播放器与同步" />
+                </StackPanel>
+            </TabItem.Header>
+            <pages:PlaybackPage x:Name="PlaybackPanel" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="14" Width="18"
+                        TextAlignment="Center" VerticalAlignment="Center" Text="" />
+                    <TextBlock Margin="9,0,0,0" Text="外观与显示" />
+                </StackPanel>
+            </TabItem.Header>
+            <pages:DisplayPage x:Name="DisplayPanel" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="14" Width="18"
+                        TextAlignment="Center" VerticalAlignment="Center" Text="" />
+                    <TextBlock Margin="9,0,0,0" Text="歌词来源与过滤" />
+                </StackPanel>
+            </TabItem.Header>
+            <pages:LyricsPage x:Name="LyricsPanel" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="14" Width="18"
+                        TextAlignment="Center" VerticalAlignment="Center" Text="" />
+                    <TextBlock Margin="9,0,0,0" Text="全局快捷键" />
+                </StackPanel>
+            </TabItem.Header>
+            <pages:ShortcutsPage x:Name="ShortcutsPanel" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="14" Width="18"
+                        TextAlignment="Center" VerticalAlignment="Center" Text="" />
+                    <TextBlock Margin="9,0,0,0" Text="实验性功能" />
+                </StackPanel>
+            </TabItem.Header>
+            <pages:ExperimentalPage x:Name="ExperimentalPanel" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" FontSize="14" Width="18"
+                        TextAlignment="Center" VerticalAlignment="Center" Text="" />
+                    <TextBlock Margin="9,0,0,0" Text="关于" />
+                </StackPanel>
+            </TabItem.Header>
+            <pages:AboutPage x:Name="AboutPanel" />
+        </TabItem>
+    </TabControl>
+</Window>

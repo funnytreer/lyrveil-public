@@ -1,0 +1,384 @@
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:state="clr-namespace:LyricsXQuiet.App.State"
+    xmlns:pages="clr-namespace:LyricsXQuiet.App.Pages" xmlns:windows="clr-namespace:LyricsXQuiet.App.Windows"
+    xmlns:playback="clr-namespace:LyricsXQuiet.Core.Playback;assembly=LyricsXQuiet.Core"
+    x:Class="LyricsXQuiet.App.Pages.PlaybackPage">
+    <ScrollViewer Style="{StaticResource SettingsScroller}">
+        <StackPanel Style="{StaticResource SettingsPage}">
+            <TextBlock Style="{StaticResource SettingsSectionTitle}" Text="播放器与同步" />
+            <UniformGrid Rows="1">
+                <Border Style="{StaticResource Card}" Margin="2,0,2,12" Padding="5,8">
+                    <StackPanel>
+                        <TextBlock Text="网易云音乐" HorizontalAlignment="Center" FontWeight="Normal" />
+                        <TextBlock HorizontalAlignment="Center" FontSize="11.5">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="等待会话" />
+                                    <Setter Property="Foreground" Value="{DynamicResource Text.Muted}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding State.ActivePlayerId}" Value="netease">
+                                            <Setter Property="Text" Value="当前会话" />
+                                            <Setter Property="Foreground" Value="{DynamicResource Accent.Primary}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="2,0,2,12" Padding="5,8">
+                    <StackPanel>
+                        <TextBlock Text="QQ 音乐" HorizontalAlignment="Center" FontWeight="Normal" />
+                        <TextBlock HorizontalAlignment="Center" FontSize="11.5">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="等待会话" />
+                                    <Setter Property="Foreground" Value="{DynamicResource Text.Muted}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding State.ActivePlayerId}" Value="qqmusic">
+                                            <Setter Property="Text" Value="当前会话" />
+                                            <Setter Property="Foreground" Value="{DynamicResource Accent.Primary}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="2,0,2,12" Padding="5,8">
+                    <StackPanel>
+                        <TextBlock Text="酷狗音乐" HorizontalAlignment="Center" FontWeight="Normal" />
+                        <TextBlock HorizontalAlignment="Center" FontSize="11.5">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="等待会话" />
+                                    <Setter Property="Foreground" Value="{DynamicResource Text.Muted}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding State.ActivePlayerId}" Value="kugou">
+                                            <Setter Property="Text" Value="当前会话" />
+                                            <Setter Property="Foreground" Value="{DynamicResource Accent.Primary}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="2,0,2,12" Padding="5,8">
+                    <StackPanel>
+                        <TextBlock Text="Apple Music" HorizontalAlignment="Center" FontWeight="Normal" />
+                        <TextBlock HorizontalAlignment="Center" FontSize="11.5">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="等待会话" />
+                                    <Setter Property="Foreground" Value="{DynamicResource Text.Muted}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding State.ActivePlayerId}" Value="applemusic">
+                                            <Setter Property="Text" Value="当前会话" />
+                                            <Setter Property="Foreground" Value="{DynamicResource Accent.Primary}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="2,0,2,12" Padding="5,8">
+                    <StackPanel>
+                        <TextBlock Text="Spotify" HorizontalAlignment="Center" FontWeight="Normal" />
+                        <TextBlock HorizontalAlignment="Center" FontSize="11.5">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="等待会话" />
+                                    <Setter Property="Foreground" Value="{DynamicResource Text.Muted}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding State.ActivePlayerId}" Value="spotify">
+                                            <Setter Property="Text" Value="当前会话" />
+                                            <Setter Property="Foreground" Value="{DynamicResource Accent.Primary}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="0,0,20,0" VerticalAlignment="Center">
+                            <TextBlock FontSize="15" FontWeight="Normal"
+                                Foreground="{DynamicResource Text.Primary}" Text="本地播放器" />
+                            <TextBlock Margin="0,5,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Secondary}"
+                                TextWrapping="Wrap" Text="选择一个其他桌面播放器。词间会读取它公开给 Windows 的歌曲信息和播放进度。" />
+                        </StackPanel>
+                        <Button x:Name="ChooseLocalPlayerButton" Grid.Column="1" Width="132"
+                            VerticalAlignment="Center" Content="选择程序…" AutomationProperties.Name="选择本地播放器程序" />
+                    </Grid>
+                    <Border Margin="0,14,0,0" Padding="10,8" Background="{DynamicResource Surface.Subtle}"
+                        CornerRadius="7">
+                        <TextBlock Foreground="{DynamicResource Text.Secondary}" FontSize="12" TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="{Binding Settings.LocalPlayerExecutablePath}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Settings.LocalPlayerExecutablePath}" Value="">
+                                            <Setter Property="Text" Value="尚未选择本地播放器" />
+                                            <Setter Property="Foreground" Value="{DynamicResource Text.Muted}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Border>
+                    <Grid Margin="0,12,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Margin="0,0,20,0" VerticalAlignment="Center" FontSize="11.5"
+                            Foreground="{DynamicResource Text.Secondary}" TextWrapping="Wrap"
+                            Text="播放器需支持 Windows 系统媒体控制；有时间线时可跟随拖动，没有时间线时仍可尝试匹配歌词。后台监听模式下也会跟随它启动和退出；浏览器不能选择。" />
+                        <Button x:Name="ClearLocalPlayerButton" Grid.Column="1" Width="92"
+                            VerticalAlignment="Center" Content="清除选择" AutomationProperties.Name="清除本地播放器选择">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Setter Property="IsEnabled" Value="True" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Settings.LocalPlayerExecutablePath}" Value="">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+                <WrapPanel>
+                    <Button x:Name="ManageMonitoredPlayersButton" Content="选择伴随播放器…" />
+                    <Button x:Name="CreateCompanionShortcutsButton" Content="创建组合快捷方式…" Margin="8,0,0,0" />
+                </WrapPanel>
+            </Border>
+            <Expander Style="{StaticResource SettingsExpander}" Header="精细同步校准">
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock FontWeight="Normal" FontSize="15" Foreground="{DynamicResource Text.Primary}"
+                            Text="同步校准" />
+                        <TextBlock Margin="0,5,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Secondary}"
+                            TextWrapping="Wrap" Text="{Binding State.LyricsStatus}" />
+                        <TextBlock Margin="0,6,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Secondary}"
+                            TextWrapping="Wrap" Text="各播放器的偏移独立保存，切换播放器时自动使用对应数值。" />
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="92" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Foreground="{DynamicResource Text.Primary}" Text="网易云默认补偿" />
+                                <TextBlock Margin="0,3,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Muted}"
+                                    Text="延后量 · 0–3000 ms" />
+                            </StackPanel>
+                            <Slider x:Name="NetEaseDefaultDelaySlider" Grid.Column="1"
+                                Style="{StaticResource ModernSlider}" AutomationProperties.Name="网易云默认补偿"
+                                AutomationProperties.HelpText="播放器偏移为 0 ms 时使用此延后量，初始为 1000 ms；修改后自动保存，只影响网易云。"
+                                Minimum="0"
+                                Maximum="{Binding Source={x:Static playback:NetEaseLyricsPositionCompensation.MaximumDelayMilliseconds}, Mode=OneTime}"
+                                TickFrequency="20" SmallChange="20" LargeChange="20" IsSnapToTickEnabled="True"
+                                Value="{Binding Settings.NetEaseSyncDelayMilliseconds}" />
+                            <Border Grid.Column="2" Margin="12,0,0,0" Padding="8,5"
+                                Background="{DynamicResource Surface.Subtle}" CornerRadius="7">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Foreground="{DynamicResource Text.Secondary}"
+                                    Text="{Binding Settings.NetEaseSyncDelayMilliseconds, StringFormat={}{0} ms}" />
+                            </Border>
+                        </Grid>
+                        <TextBlock Margin="0,8,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Secondary}"
+                            TextWrapping="Wrap" Text="播放器偏移为 0 ms 时，使用上面的默认延后量。初始为 1000 ms，可自行调整并保存。" />
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="92" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Foreground="{DynamicResource Text.Primary}" Text="网易云播放器偏移" />
+                                <TextBlock Margin="0,3,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Muted}"
+                                    Text="0 ms 使用默认补偿" />
+                            </StackPanel>
+                            <Slider x:Name="NetEaseOffsetSlider" Grid.Column="1"
+                                Style="{StaticResource ModernSlider}" AutomationProperties.Name="网易云播放器偏移"
+                                AutomationProperties.HelpText="在网易云默认补偿基础上微调，负值继续延后，正值提前；0 ms 使用保存的默认补偿。"
+                                Minimum="{Binding Source={x:Static playback:PlayerLyricsPositionCompensation.MinimumMilliseconds}, Mode=OneTime}"
+                                Maximum="{Binding Source={x:Static playback:PlayerLyricsPositionCompensation.MaximumMilliseconds}, Mode=OneTime}"
+                                TickFrequency="100" SmallChange="100" LargeChange="100" IsSnapToTickEnabled="True"
+                                Value="{Binding Settings.NetEaseOffsetMilliseconds}" />
+                            <Border Grid.Column="2" Margin="12,0,0,0" Padding="8,5"
+                                Background="{DynamicResource Surface.Subtle}" CornerRadius="7">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Foreground="{DynamicResource Text.Secondary}"
+                                    Text="{Binding Settings.NetEaseOffsetMilliseconds, StringFormat={}{0:+0;-0;0} ms}" />
+                            </Border>
+                        </Grid>
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="92" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Foreground="{DynamicResource Text.Primary}" Text="Apple Music 提前补偿" />
+                                <TextBlock Margin="0,3,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Muted}"
+                                    Text="仅 Apple Music" />
+                            </StackPanel>
+                            <Slider Grid.Column="1" Style="{StaticResource ModernSlider}"
+                                AutomationProperties.Name="Apple Music 歌词提前补偿"
+                                AutomationProperties.HelpText="数值越大，Apple Music 歌词显示越早；不会影响其他播放器。" Minimum="0"
+                                Maximum="{Binding Source={x:Static playback:AppleMusicLyricsPositionCompensation.MaximumAdvanceMilliseconds}, Mode=OneTime}"
+                                TickFrequency="20" SmallChange="20" LargeChange="20" IsSnapToTickEnabled="True"
+                                Value="{Binding Settings.AppleMusicSyncAdvanceMilliseconds}" />
+                            <Border Grid.Column="2" Margin="12,0,0,0" Padding="8,5"
+                                Background="{DynamicResource Surface.Subtle}" CornerRadius="7">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Foreground="{DynamicResource Text.Secondary}"
+                                    Text="{Binding Settings.AppleMusicSyncAdvanceMilliseconds, StringFormat={}{0} ms}" />
+                            </Border>
+                        </Grid>
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="92" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Foreground="{DynamicResource Text.Primary}" Text="QQ 音乐 偏移" />
+                                <TextBlock Margin="0,3,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Muted}"
+                                    Text="负值延后 · 正值提前" />
+                            </StackPanel>
+                            <Slider x:Name="QqMusicOffsetSlider" Grid.Column="1"
+                                Style="{StaticResource ModernSlider}" AutomationProperties.Name="QQ 音乐 歌词偏移"
+                                AutomationProperties.HelpText="只影响 QQ 音乐，范围负 3000 到正 3000 毫秒，正值提前、负值延后。"
+                                Minimum="{Binding Source={x:Static playback:PlayerLyricsPositionCompensation.MinimumMilliseconds}, Mode=OneTime}"
+                                Maximum="{Binding Source={x:Static playback:PlayerLyricsPositionCompensation.MaximumMilliseconds}, Mode=OneTime}"
+                                TickFrequency="100" SmallChange="100" LargeChange="100" IsSnapToTickEnabled="True"
+                                Value="{Binding Settings.QqMusicOffsetMilliseconds}" />
+                            <Border Grid.Column="2" Margin="12,0,0,0" Padding="8,5"
+                                Background="{DynamicResource Surface.Subtle}" CornerRadius="7">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Foreground="{DynamicResource Text.Secondary}"
+                                    Text="{Binding Settings.QqMusicOffsetMilliseconds, StringFormat={}{0:+0;-0;0} ms}" />
+                            </Border>
+                        </Grid>
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="92" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Foreground="{DynamicResource Text.Primary}" Text="酷狗音乐 偏移" />
+                                <TextBlock Margin="0,3,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Muted}"
+                                    Text="负值延后 · 正值提前" />
+                            </StackPanel>
+                            <Slider x:Name="KugouOffsetSlider" Grid.Column="1" Style="{StaticResource ModernSlider}"
+                                AutomationProperties.Name="酷狗音乐 歌词偏移"
+                                AutomationProperties.HelpText="只影响 酷狗音乐，范围负 3000 到正 3000 毫秒，正值提前、负值延后。"
+                                Minimum="{Binding Source={x:Static playback:PlayerLyricsPositionCompensation.MinimumMilliseconds}, Mode=OneTime}"
+                                Maximum="{Binding Source={x:Static playback:PlayerLyricsPositionCompensation.MaximumMilliseconds}, Mode=OneTime}"
+                                TickFrequency="100" SmallChange="100" LargeChange="100" IsSnapToTickEnabled="True"
+                                Value="{Binding Settings.KugouOffsetMilliseconds}" />
+                            <Border Grid.Column="2" Margin="12,0,0,0" Padding="8,5"
+                                Background="{DynamicResource Surface.Subtle}" CornerRadius="7">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Foreground="{DynamicResource Text.Secondary}"
+                                    Text="{Binding Settings.KugouOffsetMilliseconds, StringFormat={}{0:+0;-0;0} ms}" />
+                            </Border>
+                        </Grid>
+                        <Grid Margin="0,16,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="92" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Foreground="{DynamicResource Text.Primary}" Text="Spotify 偏移" />
+                                <TextBlock Margin="0,3,0,0" FontSize="11.5" Foreground="{DynamicResource Text.Muted}"
+                                    Text="负值延后 · 正值提前" />
+                            </StackPanel>
+                            <Slider x:Name="SpotifyOffsetSlider" Grid.Column="1"
+                                Style="{StaticResource ModernSlider}" AutomationProperties.Name="Spotify 歌词偏移"
+                                AutomationProperties.HelpText="只影响 Spotify，范围负 3000 到正 3000 毫秒，正值提前、负值延后。"
+                                Minimum="{Binding Source={x:Static playback:PlayerLyricsPositionCompensation.MinimumMilliseconds}, Mode=OneTime}"
+                                Maximum="{Binding Source={x:Static playback:PlayerLyricsPositionCompensation.MaximumMilliseconds}, Mode=OneTime}"
+                                TickFrequency="100" SmallChange="100" LargeChange="100" IsSnapToTickEnabled="True"
+                                Value="{Binding Settings.SpotifyOffsetMilliseconds}" />
+                            <Border Grid.Column="2" Margin="12,0,0,0" Padding="8,5"
+                                Background="{DynamicResource Surface.Subtle}" CornerRadius="7">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Foreground="{DynamicResource Text.Secondary}"
+                                    Text="{Binding Settings.SpotifyOffsetMilliseconds, StringFormat={}{0:+0;-0;0} ms}" />
+                            </Border>
+                        </Grid>
+                        <Border Height="1" Background="{DynamicResource Border.Hairline}" Margin="0,14,0,6" />
+                        <Expander Style="{StaticResource SettingsExpander}" IsExpanded="False">
+                            <Expander.Header>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Normal" Foreground="{DynamicResource Text.Primary}"
+                                        Text="高级校准" />
+                                    <TextBlock Margin="0,3,0,0" FontSize="11.5"
+                                        Foreground="{DynamicResource Text.Muted}" Text="统一偏移与单曲校准记录" />
+                                </StackPanel>
+                            </Expander.Header>
+                            <StackPanel>
+                                <TextBlock Margin="0,0,0,12" FontSize="11.5"
+                                    Foreground="{DynamicResource Text.Secondary}" TextWrapping="Wrap"
+                                    Text="此项会叠加到所有播放器。只需校准某个播放器时，请使用上方的独立偏移。" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="92" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock VerticalAlignment="Center"
+                                        Foreground="{DynamicResource Text.Primary}" Text="所有播放器统一偏移" />
+                                    <Slider Grid.Column="1" Style="{StaticResource ModernSlider}"
+                                        AutomationProperties.Name="所有播放器统一偏移"
+                                        AutomationProperties.HelpText="叠加到所有播放器。正值让歌词提前，负值让歌词延后。" Minimum="-10000"
+                                        Maximum="10000" TickFrequency="100" SmallChange="100"
+                                        Value="{Binding Settings.OffsetMilliseconds}" />
+                                    <Border Grid.Column="2" Margin="12,0,0,0" Padding="8,5"
+                                        Background="{DynamicResource Surface.Subtle}" CornerRadius="7">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            Foreground="{DynamicResource Text.Secondary}"
+                                            Text="{Binding Settings.OffsetMilliseconds, StringFormat={}{0} ms}" />
+                                    </Border>
+                                </Grid>
+                                <Grid Margin="0,16,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Margin="0,0,20,0">
+                                        <TextBlock Foreground="{DynamicResource Text.Primary}" FontWeight="Normal"
+                                            Text="单曲校准记录" />
+                                        <TextBlock Margin="0,4,0,0" FontSize="11.5"
+                                            Foreground="{DynamicResource Text.Secondary}" TextWrapping="Wrap"
+                                            Text="快速面板中的“本曲校准”只影响对应歌曲。" />
+                                    </StackPanel>
+                                    <Button x:Name="ClearTrackLyricOffsetsButton" Grid.Column="1"
+                                        VerticalAlignment="Center" Content="清除全部…" />
+                                </Grid>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </Border>
+            </Expander>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
